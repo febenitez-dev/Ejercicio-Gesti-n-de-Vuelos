@@ -1,0 +1,100 @@
+@startuml
+
+entity "Aeropuerto" as aeropuerto {
+    * aer_id: bigint <<PK>>
+    * aer_ubicacion: bigint <<FK>>
+    * aer_nombre: varchar
+    * aer_cantidadPuertas: int
+}
+
+entity "Ubicacion" as ubicacion {
+    * ubi_id: bigint <<PK>>
+    * ubi_ciudad: varchar
+    * ubi_pais: varchar
+}
+
+ubicacion ||--|| aeropuerto
+
+entity "Avion" as avion {
+    * avi_id: bigint <<PK>>
+    * avi_modelo: varchar
+    * avi_aerolinea: varchar
+    * avi_cantidadAsientos: int
+    * avi_fechaAlta: smalldatetime
+    avi_fechaModificacion: smalldatetime
+}
+
+entity "Asiento" as asiento {
+    * asi_id: bigint <<PK>> <<FK>>
+    * asi_avion: bigint <<FK>>
+    * asi_ocupado: bit
+    * asi_tipo: varchar
+    * asi_columna: int
+    * asi_fila: int
+}
+
+avion ||--|{ asiento
+
+entity "Persona" as persona {
+    * per_id: bigint <<PK>>
+    * per_pasaporte: bigint <<FK>>
+    * per_nombre: varchar
+    * per_apellido: varchar
+    * per_dni: bigint
+}
+
+entity "Pasajero" as pasajero {
+    * pas_id: bigint <<PK>> <<FK>>
+    * pas_cantidadVuelos: int
+}
+
+entity "Piloto" as piloto {
+    * pil_id: bigint <<PK>> <<FK>>
+    * pil_matricula: varchar
+    * pil_cantidadVuelos: int
+    * pil_horasVuelo: int
+}
+
+pasajero |o-down-|| persona
+piloto |o-left-|| persona
+
+entity "Vuelo" as vuelo {
+    * vue_id: bigint <<PK>>
+    * vue_avion: bigint <<FK>>
+    * vue_piloto: bigint <<FK>>
+    * vue_aeropuerto_origen: bigint <<FK>>
+    * vue_aeropuerto_destino: bigint <<FK>>
+    * vue_fecha: smalldatetime
+    * vue_duracionHoras: int
+}
+
+vuelo ||--|| piloto
+vuelo }|--|| avion
+
+aeropuerto ||--|| vuelo
+aeropuerto ||--|| vuelo
+
+entity "Pasaje" as pasaje {
+    * pje_id: bigint <<PK>>
+    * pje_pasajero: bigint <<FK>>
+    * pje_vuelo: bigint <<FK>>
+    * pje_asiento: bigint <<FK>>
+    * pje_precio: decimal
+}
+
+pasaje }|-down-|| vuelo
+pasaje }|-down-|| pasajero
+pasaje ||-down-|| asiento
+
+entity "Pasaporte" as pasaporte {
+    * psp_id: bigint <<PK>>
+    * psp_numeroPasaporte: bigint
+    * psp_fechaEmision: smalldatetime
+    * psp_fechaVencimiento: smalldatetime
+    * psp_fechaAlta: smalldatetime
+    psp_fechaModificacion: smalldatetime
+}
+
+persona ||--|| pasaporte
+
+@enduml
