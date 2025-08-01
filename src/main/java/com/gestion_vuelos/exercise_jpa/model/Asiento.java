@@ -5,23 +5,23 @@ import jakarta.persistence.*;
 @Entity
 public class Asiento {
     @Id @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @OneToMany
     @Column(nullable = false)
     private Avion avion;
 
     @Column(nullable = false)
-    private boolean ocupado;
+    private Boolean ocupado;
 
     @Column(nullable = false)
     private String tipo;
 
     @Column(nullable = false)
-    private int fila;
+    private Integer fila;
 
     @Column(nullable = false)
-    private int columna;
+    private Integer columna;
 
     protected Asiento() {
     }
