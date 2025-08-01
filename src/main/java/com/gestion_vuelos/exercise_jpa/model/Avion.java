@@ -20,11 +20,11 @@ public class Avion {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
 
-   @Column(length = 30, nullable = true)
+   @Column(length = 30, nullable = false)
    private String modelo;
 
 
-   @Column(length = 100)
+@Column(length = 100, nullable = false)
    private String aerolinea;
 
    @OneToMany(mappedBy = "avion")
@@ -39,6 +39,8 @@ public class Avion {
    @UpdateTimestamp
    private LocalDateTime ultimaModificacion;
    
+   public Avion(){}
+
     public Long getId() {
         return id;
     }
