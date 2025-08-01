@@ -7,7 +7,7 @@ public class Asiento {
     @Id @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
+    @ManyToOne
     @Column(nullable = false)
     private Avion avion;
 
