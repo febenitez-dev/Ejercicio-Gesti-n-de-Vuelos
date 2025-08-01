@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Pasaporte {
@@ -18,6 +19,8 @@ public class Pasaporte {
     String nacionalidad;
     LocalDate fechaVencimiento;
     LocalDate fechaEmision;
+    @OneToOne(mappedBy = "persona")
+    Persona persona;
     @CreationTimestamp
     LocalDate fechaCreacion;
     @UpdateTimestamp
