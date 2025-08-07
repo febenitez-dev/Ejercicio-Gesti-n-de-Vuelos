@@ -9,8 +9,7 @@ import jakarta.persistence.OneToMany;
 public class Pasajero extends Persona {
 
     /* atributos */
-    @OneToMany
-    @JoinColumn(name = "pasajero_id")
+    @OneToMany(mappedBy = "pasajero")
     private List<Pasaje> pasajes;
 
     @Column(nullable = true)

@@ -16,7 +16,7 @@ public class Piloto extends Persona {
     @Column(nullable = false, name = "horas_vuelo")
     private int horasDeVuelo;
 
-    @OneToOne
+    @OneToOne(mappedBy = "piloto") // consultar si el propietario de la relacion es vuelo o es piloto
     private Vuelo vuelo;
 
     public Piloto() {

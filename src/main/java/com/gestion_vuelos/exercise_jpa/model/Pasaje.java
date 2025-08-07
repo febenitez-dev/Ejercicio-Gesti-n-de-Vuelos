@@ -17,14 +17,15 @@ public class Pasaje {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "vuelo_pasaje")
+    @JoinColumn(name = "vuelo_pasaje", referencedColumnName = "id")
     private Vuelo vuelo;
 
     @ManyToOne
-    @JoinColumn(name = "pasajero_id")
+    @JoinColumn(name = "pasajero_id", referencedColumnName = "id") // consultar esto
     private Pasajero pasajero;
 
     @OneToOne
+    @JoinColumn(name = "asiento_id", referencedColumnName = "id")
     private Asiento asiento;
 
     @Column(nullable = false)
@@ -40,10 +41,6 @@ public class Pasaje {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Vuelo getVuelo() {
